@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePinjam extends Migration
+class CreateTableAdmin extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTablePinjam extends Migration
      */
     public function up()
     {
-        Schema::create('pinjam', function (Blueprint $table) {
+        Schema::create('admin', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('book_id');
-            $table->date('startdate');
-            $table->date('enddate');
-            $table->integer('status')->nullable()->default(0);
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateTablePinjam extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pinjam');
+        Schema::dropIfExists('admin');
     }
 }

@@ -13,8 +13,13 @@ class CreateTableBook extends Migration
      */
     public function up()
     {
-        Schema::create('table_book', function (Blueprint $table) {
+        Schema::create('book', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('code',10);
+            $table->string('title',100);
+            $table->integer('year_release');
+            $table->string('writer',100);
+            $table->integer('stock');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateTableBook extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_book');
+        Schema::dropIfExists('book');
     }
 }

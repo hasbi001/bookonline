@@ -1,0 +1,6 @@
+.nav-pills ul li:first-child { margin-right: 4%; }
+.nav-pills ul li.active, .nav-pills ul li:hover {
+	background: #4482c3;
+	color: #FFF;
+	padding: 2%;
+}

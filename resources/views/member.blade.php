@@ -1,7 +1,7 @@
 @extends('adminlte::page')
-@section('title', 'Book Online | Dashboard - Admin')
+@section('title', 'Book Online | Dashboard - Member')
 @section('content_header')
-    <h1>Dashboard | Admin</h1>
+    <h1>Dashboard | Member</h1>
 @stop
 @section('content')
   <div class="row">
@@ -9,7 +9,7 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>Admin</h3>
+          <h3>Member</h3>
           <p>Users</p>
         </div>
         <div class="icon">

@@ -9,7 +9,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>Users</h3>
+              <h3>General Users</h3>
               <p>Users</p>
             </div>
             <div class="icon">

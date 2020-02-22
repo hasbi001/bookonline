@@ -28,3 +28,9 @@ Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::post('/register/member', 'Auth\RegisterController@createMember');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::view('/admin', 'admin');
+Route::view('/member', 'member');
+
+Route::get('/admin/book', 'admin\BookController@index');
+Route::get('/admin/book/data', 'admin\BookController@LoadData');

@@ -9,90 +9,39 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/bookonline.css') }}" >
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="{{ asset('js/jquery-3.4.1.min.js') }}" ></script>
+        <script src="{{ asset('js/moment.min.js') }}" ></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" ></script>
+        <style type="text/css">
+            a { color: #000; }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+            <div class="container-fluid">
+                <center>
+                    <div class="col-md-6">
+                        <ul class="nav nav-pills">
+                            <li class="active"><a data-toggle="pill" href="#admin">Admin</a></li>
+                            <li><a data-toggle="pill" href="#member">Member</a></li>
+                        </ul>
+                          
+                        <div class="tab-content">
+                            <div id="admin" class="tab-pane fade in active">
+                              <a href="{{ url('/login/admin') }}">Login Admin</a> | <a href="{{ url('/register/admin') }}">Register Admin</a>
+                            </div>
+                            <div id="member" class="tab-pane fade">
+                              <a href="{{ url('/login/member') }}">Login Member</a> | <a href="{{ url('/register/member') }}">Register Member</a>
+                            </div>
+                        </div>
+                    </div>
+                </center>
+                 
             </div>
         </div>
     </body>

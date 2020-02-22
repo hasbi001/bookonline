@@ -48,12 +48,12 @@ return [
         ],
 
         'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'driver' => 'session',
+            'provider' => 'admin',
         ],
         'member' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Member::class,
+            'driver' => 'session',
+            'provider' => 'member',
         ],
     ],
 
@@ -79,7 +79,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'member' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

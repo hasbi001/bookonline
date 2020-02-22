@@ -156,7 +156,7 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        [
+        /*[
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
@@ -192,7 +192,7 @@ return [
                     'text' => 'level_one',
                     'url'  => '#',
                 ],
-            ],
+            ],*/
         ],
         ['header' => 'labels'],
         [

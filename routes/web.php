@@ -34,3 +34,10 @@ Route::view('/member', 'member');
 
 Route::get('/admin/book', 'admin\BookController@index');
 Route::get('/admin/book/data', 'admin\BookController@LoadData');
+Route::get('/admin/book/create', 'admin\BookController@create');
+Route::post('/admin/book/save', 'admin\BookController@store');
+Route::get('/admin/book/view/{id}', 'admin\BookController@view')->name('admin.book.view');
+Route::get('/admin/book/edit/{id}', 'admin\BookController@edit')->name('admin.book.edit');
+Route::post('/admin/book/update/{id}', 'admin\BookController@update')->name('admin.book.update');
+Route::get('/admin/book/delete/{id}', 'admin\BookController@destroy')->name('admin.book.delete');
+

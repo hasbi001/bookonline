@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use use App\Models\Book;
+use App\Models\Book;
+use DB;
 class BookController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.book.create');
     }
 
     /**
@@ -35,7 +36,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+             'code' => 'required|max:10|alpha_num',
+             'title' => 'required|max:100',
+             'year_release' => 'required|numeric',
+             'writer' => 'required|max:100',
+             'stock' => 'required|numeric'
+         ]);
+         $book = Book::create($validatedData);
+
+         return redirect('/admin/book')->with('success', 'Book is successfully saved');
     }
 
     /**
@@ -46,7 +57,8 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        $model = Book::find($id);
+        return view('admin.book.view', ['model' => $model]);
     }
 
     /**
@@ -57,7 +69,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Book::find($id);
+        return view('admin.book.edit', ['id' => $id, 'model' => $model]);
     }
 
     /**
@@ -69,7 +82,17 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+             'code' => 'required|max:10|alpha_num',
+             'title' => 'required|max:100',
+             'year_release' => 'required|numeric',
+             'writer' => 'required|max:100',
+             'stock' => 'required|numeric'
+         ]);
+         
+         Book::whereId($id)->update($validatedData);
+
+         return redirect('/admin/book')->with('success', 'Book is successfully Updated');
     }
 
     /**
@@ -80,12 +103,23 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        return redirect('/admin/book')->with('success', 'Book is successfully deleted');
     }
 
     public function LoadData(Request $request)
     {
-        $model = Book
-        # code...
+        $book = DB::table('book')
+                   ->select('*');
+
+        return datatables()->of($book)
+                            ->addColumn('action', function($row){
+                                return $btn = '<a href="'.route('admin.book.edit',['id' => $row->id]).'" class="btn btn-primary">Edit</a> | <a href="'.route('admin.book.view',['id' => $row->id]).'" class="btn btn-info">View</a> | <a href="'.route('admin.book.delete',['id' => $row->id]).'" class="btn btn-danger">Delete</a>';
+                            })
+                            ->rawColumns(['action'])
+                            ->addIndexColumn()
+                            ->make(true);
     }
 }

@@ -133,7 +133,7 @@ return [
             'search' => true,
         ],
         ['header' => 'main_navigation'],
-        [
+        /*[
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
@@ -144,12 +144,12 @@ return [
             'icon'        => 'far fa-file',
             'label'       => 4,
             'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
+        ],*/
+        // ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Book',
+            'url'  => '/admin/book',
+            'icon' => 'fas fa-fw fa-book',
         ],
         [
             'text' => 'change_password',
@@ -192,9 +192,9 @@ return [
                     'text' => 'level_one',
                     'url'  => '#',
                 ],
-            ],*/
-        ],
-        ['header' => 'labels'],
+            ],
+        ],*/
+        /*['header' => 'labels'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -206,7 +206,7 @@ return [
         [
             'text'       => 'information',
             'icon_color' => 'aqua',
-        ],
+        ],*/
     ],
 
     /*

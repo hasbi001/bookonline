@@ -23,37 +23,52 @@ class PinjamanController extends Controller
 
      public function LoadData(Request $request)
     {
-        $book = DB::table('book')
+        $pinjam = DB::table('pinjam')
                    ->select('*');
 
-        return datatables()->of($book)
-                            ->addColumn('action', function($row){
-                                return $btn = '<a href="javascript:void(0)" class="btn btn-primary" onclick="approval('.$row->id.',1)">Approve </a> | <a href="javascript:void(0)" class="btn btn-primary" onclick="approval('.$row->id.',2)">Reject</a>';
-                            })->addColumn('member', function($row){
-    $member = Member::find($row->user_id);
-    return $member->name;
-})->addColumn('judul', function($row){
-    $book = Book::find($row->book_id);
-    return $book->title;
-})->editColumn('status', function($row) { 
-  $status = 'wait';
-  if($row->status == 1) { 
-   $status = 'approved';
-  } else if($row->status == 2) {
-    $status = 'rejected';
-  } else { $status = 'wait';} 
-return $status;})->rawColumns(['action', 'member', 'judul' ])->addIndexColumn()->make(true);
+        return datatables()->of($pinjam)
+          ->addColumn('action', function($row){
+              $btn = "";
+              if ($row->status == 0) {
+                $btn = '<a href="javascript:void(0)" class="btn btn-primary" onclick="approval('.$row->id.',1)">Approve </a> | <a href="javascript:void(0)" class="btn btn-primary" onclick="approval('.$row->id.',2)">Reject</a>';
+              }
+              return $btn;
+              
+          })->addColumn('member', function($row){
+              $member = Member::find($row->user_id);
+              return $member->name;
+          })->addColumn('judul', function($row){
+              $book = Book::find($row->book_id);
+              return $book->title;
+          })->editColumn('status', function($row) { 
+            $status = 'wait';
+            if($row->status == 1) { 
+             $status = 'approved';
+            } elseif($row->status == 2) {
+              $status = 'rejected';
+            } elseif ($row->status == 3) {
+              $status = 'come back';
+            } else { $status = 'wait';} 
+              return $status;
+            })->rawColumns(['action', 'member', 'judul' ])->addIndexColumn()->make(true);
     }
 
-    Public function approval(Request $request) {
-    $model = Pinjam::find($request->id);
-    $model->status = $request->status;
-    if($model->save()){
-        return response()->json(['status' => 200, 'message'=>'success']);
-    }
-    else
-    {
-       return response()->json(['status' => 401, 'message'=>'data has not change, try again! ']);
-    }      
-  } 
+    Public function store(Request $request) {
+      $model = Pinjam::find($request->id);
+      $model->status = $request->status;
+      if($model->save()){
+          if ($request->status == 1) {
+             $book = Book::find($model->book_id);
+             if ($book->stock > 0) {
+               $book->stock = $book->stock - 1;
+               $book->save();
+             }
+          }
+          return response()->json(['status' => 200, 'message'=>'success']);
+      }
+      else
+      {
+         return response()->json(['status' => 401, 'message'=>'data has not change, try again! ']);
+      }      
+    } 
 }

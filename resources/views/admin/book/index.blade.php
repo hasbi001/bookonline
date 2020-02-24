@@ -25,8 +25,6 @@
               </thead>
           </table>
       </div>
-      <!-- Button -->
-      <a href="#" class="btn btn-primary">Button</a>
 
     </div>
 
@@ -38,6 +36,7 @@
   <script type="text/javascript">
 
     $(document).ready(function () {
+      alert('ada');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

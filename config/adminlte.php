@@ -152,9 +152,14 @@ return [
             'icon' => 'fas fa-fw fa-book',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Member',
+            'url'  => '/admin/member',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Pinjaman',
+            'url'  => '/admin/pinjam',
+            'icon' => 'fas fa-fw fa-list',
         ],
         /*[
             'text'    => 'multilevel',

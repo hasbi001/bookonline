@@ -1,10 +1,7 @@
-@extends('adminlte::page')
-@section('title', 'Admin Pinjam Online | book')
-@section('content_header')
-    <h1>Dashboard | Pinjam </h1>
-@stop
+@extends('layouts.default')
+
 @section('content')
-  <!-- Card -->
+<!-- Card -->
   <div class="card">
     <!-- Card content -->
     <div class="card-body">
@@ -14,13 +11,11 @@
               <thead class="text-primary">
                   <tr>
                       <th></th>
-                      <th>NO</th>
-                      <th>ACTION</th>
-                      <th>Member</th>
+                      <th>No</th>
+                      <th>Action</th>
                       <th>Judul Buku</th>
                       <th>Date Start</th>
                       <th>Date Finish</th>
-                      <th>Date Return</th>
                       <th>Status</th>
                   </tr>
               </thead>
@@ -30,8 +25,10 @@
     </div>
 
   </div>
+
+  </div>
   <!-- Card -->
-@stop
+@endsection
 
 @section('js')
   <script type="text/javascript">
@@ -39,7 +36,7 @@
     $(document).ready(function () {
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         });
 
@@ -47,25 +44,24 @@
             'processing': true,
             'serverSide': true,
             'ajax': {
-                url: '{{ url("/admin/pinjam/data") }}',
+                url: '{{ url("/member/pinjam/list") }}',
                 type: 'GET',
+                data: { userid:{{ Auth::guard('member')->user()->id }} }
             },
             columns: [
                 {data: 'id', name: 'id', 'visible': false},
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
-                {data: 'member', name: 'member'},
                 {data: 'judul', name: 'judul'},
                 {data: 'startdate', name: 'startdate'},
                 {data: 'enddate', name: 'enddate'},
-                {data: 'returndate', name: 'returndate'},
                 {data: 'status', name: 'status'},
             ],
             order: [[0, 'asc']],
             searchDelay: 3000
         } );
     });
-    function approval(id,status) {
+    function comeback(id) {
       $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -75,19 +71,19 @@
 
       type:'POST',
 
-      url:'{{ url("/admin/pinjam/approval") }} ',
+      url:'{{ url("/member/pinjam/update") }} ',
+      dataType:'JSON',
+      data:{id:id},
 
-      data:{id:id, status:status},
-      dataType:"JSON",
       success:function(data){
-         $('#pinjam').DataTable().draw();
-         alert(data.message);
+        var btn = "btnpinjam_"+id;
+        document.getElementById(btn).disabled = true;
+        $('#pinjam').DataTable().draw();
+        alert(data.message);
 
       }
 
-});
-
-
-    } 
-  </script>
-@stop
+    });
+  }
+</script>
+@endsection

@@ -50,6 +50,13 @@ Route::get('/admin/member/edit/{id}', 'admin\MemberController@edit')->name('admi
 Route::post('/admin/member/update/{id}', 'admin\MemberController@update')->name('admin.member.update');
 Route::get('/admin/member/delete/{id}', 'admin\MemberController@destroy')->name('admin.member.delete');
 
-Route::get('/admin/pinjam', 'admin\PinjamController@index');
-Route::get('/admin/pinjam/data', 'admin\PinjamController@LoadData');
-Route::post('/admin/pinjam/approval', 'admin\PinjamController@approval');
+Route::get('/admin/pinjam', 'admin\PinjamanController@index');
+Route::get('/admin/pinjam/data', 'admin\PinjamanController@LoadData');
+Route::post('/admin/pinjam/approval', 'admin\PinjamanController@store');
+
+Route::get('/member/pinjam', 'PinjamController@index');
+Route::get('/member/pinjam/data', 'PinjamController@LoadData');
+Route::get('/member/pinjam/create', 'PinjamController@create')->name('pinjam.pengajuan');
+Route::post('/member/pinjam/approval', 'PinjamController@store')->name('pinjam.save');
+Route::get('/member/pinjam/list', 'PinjamController@LoadDataPinjam');
+Route::post('/member/pinjam/update', 'PinjamController@update')->name('pinjam.update');

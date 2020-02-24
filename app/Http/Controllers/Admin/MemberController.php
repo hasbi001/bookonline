@@ -96,7 +96,7 @@ class MemberController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'string|min:8' ]);
          if($validatedData->fails()) {
-         return redirect('/admin/member/create')->withErrors($validator) ->withInput();
+         return redirect('/admin/member/edit')->withErrors($validatedData)->withInput();
          } 
          else
          {
@@ -130,7 +130,7 @@ class MemberController extends Controller
                    ->select('*');
 
         return datatables()->of($member)->addColumn('action', function($row){
-                                return $btn = '<a href="'.route('admin.member.edit',['id' => $row->id]).'" class="btn btn-primary">Edit</a> | <a href="'.route('admin.member.view',['id' => $row->id]).'" class="btn btn-info">View</a> | <a href="'.route('admin.member. delete',['id' => $row->id]).'" class="btn btn-danger">Delete</a>';
+                                return $btn = '<a href="'.route('admin.member.edit',['id' => $row->id]).'" class="btn btn-primary">Edit</a> | <a href="'.route('admin.member.view',['id' => $row->id]).'" class="btn btn-info">View</a> | <a href="'.route('admin.member.delete',['id' => $row->id]).'" class="btn btn-danger">Delete</a>';
                             })
                             ->rawColumns(['action'])
                             ->addIndexColumn()

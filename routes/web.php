@@ -41,3 +41,15 @@ Route::get('/admin/book/edit/{id}', 'admin\BookController@edit')->name('admin.bo
 Route::post('/admin/book/update/{id}', 'admin\BookController@update')->name('admin.book.update');
 Route::get('/admin/book/delete/{id}', 'admin\BookController@destroy')->name('admin.book.delete');
 
+Route::get('/admin/member', 'admin\MemberController@index');
+Route::get('/admin/member/data', 'admin\MemberController@LoadData');
+Route::get('/admin/member/create', 'admin\MemberController@create');
+Route::post('/admin/member/save', 'admin\MemberController@store');
+Route::get('/admin/member/view/{id}', 'admin\MemberController@show')->name('admin.member.view');
+Route::get('/admin/member/edit/{id}', 'admin\MemberController@edit')->name('admin.member.edit');
+Route::post('/admin/member/update/{id}', 'admin\MemberController@update')->name('admin.member.update');
+Route::get('/admin/member/delete/{id}', 'admin\MemberController@destroy')->name('admin.member.delete');
+
+Route::get('/admin/pinjam', 'admin\PinjamController@index');
+Route::get('/admin/pinjam/data', 'admin\PinjamController@LoadData');
+Route::post('/admin/pinjam/approval', 'admin\PinjamController@approval');
